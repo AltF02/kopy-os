@@ -1,14 +1,12 @@
 #![no_std]
 #![no_main]
-
 #![feature(custom_test_frameworks)]
 #![test_runner(test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
-use kopy_os::{QemuExitCode, exit_qemu, serial_println, serial_print};
-use kopy_os::{Red, Green};
-
+use kopy_os::{exit_qemu, serial_print, serial_println, QemuExitCode};
+use kopy_os::{Green, Red};
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
@@ -39,4 +37,3 @@ pub fn test_runner(tests: &[&dyn Fn()]) {
     }
     exit_qemu(QemuExitCode::Success);
 }
-

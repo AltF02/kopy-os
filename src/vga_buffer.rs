@@ -1,8 +1,8 @@
-use volatile::Volatile;
 use core::fmt;
+use core::fmt::Write;
 use lazy_static::lazy_static;
 use spin::Mutex;
-use core::fmt::Write;
+use volatile::Volatile;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -121,7 +121,7 @@ lazy_static! {
     pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
         column_position: 0,
         color_code: ColorCode::new(Color::Yellow, Color::Black),
-        buffer: unsafe { & mut * (0xb8000 as * mut Buffer) },
+        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
     });
 }
 
