@@ -7,6 +7,7 @@
 
 use core::panic::PanicInfo;
 use kopy_os::{QemuExitCode, exit_qemu, serial_println, serial_print};
+use kopy_os::{Red, Green};
 
 
 #[no_mangle]
@@ -24,7 +25,7 @@ fn should_fail() {
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
-    serial_println!("[ok]");
+    serial_println!("{}", Green("[ok]"));
     exit_qemu(QemuExitCode::Success);
     loop {}
 }
@@ -33,7 +34,7 @@ pub fn test_runner(tests: &[&dyn Fn()]) {
     serial_println!("Running {} tests", tests.len());
     for test in tests {
         test();
-        serial_println!("[test did not panic]");
+        serial_println!("{}", Red("[test did not panic]"));
         exit_qemu(QemuExitCode::Failed);
     }
     exit_qemu(QemuExitCode::Success);

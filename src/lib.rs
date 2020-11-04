@@ -6,22 +6,45 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
+use core::fmt;
 
 pub mod serial;
 pub mod vga_buffer;
 
+pub struct Green(pub &'static str);
+
+impl fmt::Display for Green {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "\x1B[32m");
+        write!(f, "{}", self.0)?;
+        write!(f, "\x1B[0m")?;
+        Ok(())
+    }
+}
+
+pub struct Red(pub &'static str);
+
+impl fmt::Display for Red {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "\x1b[31m");
+        write!(f, "{}", self.0)?;
+        write!(f, "\x1B[0m")?;
+        Ok(())
+    }
+}
+
 pub trait Testable {
-    fn run(&self) -> ();
+    fn run(&self);
 }
 
 impl<T> Testable for T
     where
         T: Fn(),
 {
-    fn run(&self) -> () {
+    fn run(&self) {
         serial_print!("{}...\t", core::any::type_name::<T>());
         self();
-        serial_println!("[ok]");
+        serial_println!("{}", Green("[ok]"));
     }
 }
 
@@ -35,7 +58,7 @@ pub fn test_runner(tests: &[&dyn Testable]) {
 
 
 pub fn test_panic_handler(info: &PanicInfo) -> ! {
-    serial_println!("[failed]\n");
+    serial_println!("{}", Red("[failed]\n"));
     serial_println!("Error: {}\n", info);
     exit_qemu(QemuExitCode::Failed);
     loop {}
