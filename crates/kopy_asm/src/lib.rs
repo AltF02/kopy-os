@@ -2,7 +2,7 @@
 #![no_main]
 #![no_std]
 
-global_asm!(include_str!("add.s"));
+global_asm!(include_str!("add.S"));
 
 extern "C" {
     fn _my_adder(a: u64, b: u64) -> u64;
