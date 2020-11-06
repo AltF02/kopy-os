@@ -7,12 +7,16 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+pc-keyboard = "0.5.0"
+pic8259_simple = "0.2.0"
 bootloader = "0.9.11"
 volatile = "0.2.6"
 spin = "0.7.0"
 x86_64 = "0.12.2"
 uart_16550 = "0.2.10"
 ksh = { path = "./crates/ksh"}
+kopy_keyboard = { path = "./crates/kopy_keyboard"}
+kopy_core = { path = "./crates/kopy_core" }
 
 [dependencies.lazy_static]
 version = "1.0"

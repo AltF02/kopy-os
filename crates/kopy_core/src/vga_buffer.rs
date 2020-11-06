@@ -3,6 +3,7 @@ use core::fmt::Write;
 use lazy_static::lazy_static;
 use spin::Mutex;
 use volatile::Volatile;
+use x86_64::instructions::interrupts;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -116,6 +117,20 @@ impl Writer {
             self.buffer.chars[row][col].write(blank);
         }
     }
+
+    pub fn delete_last_character(&mut self) {
+        let blank = ScreenChar {
+            ascii_character: b' ',
+            color_code: self.color_code,
+        };
+
+        if self.column_position > 2 {
+            let mut row = BUFFER_HEIGHT - 1;
+            let col = self.column_position - 1;
+            self.column_position = col;
+            self.buffer.chars[row][col].write(blank);
+        }
+    }
 }
 
 lazy_static! {
@@ -139,5 +154,7 @@ macro_rules! println {
 
 #[doc(hidden)]
 pub fn _print(args: fmt::Arguments) {
-    WRITER.lock().write_fmt(args).unwrap();
+    interrupts::without_interrupts(|| {
+        WRITER.lock().write_fmt(args).unwrap();
+    })
 }
