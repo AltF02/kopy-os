@@ -1,6 +1,5 @@
 use crate::gdt;
-use bootloader::bootinfo::MemoryRegionType::Package;
-use kopy_core::{print, println};
+use kopy_core::println;
 use lazy_static::lazy_static;
 use pic8259_simple::ChainedPics;
 use spin;
@@ -69,8 +68,6 @@ extern "x86-interrupt" fn timer_interrupt_handler(_stack_frame: &mut InterruptSt
 }
 
 extern "x86-interrupt" fn keyboard_interrupt_handler(_stack_frame: &mut InterruptStackFrame) {
-    use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
-    use spin::Mutex;
     use x86_64::instructions::port::Port;
 
     let mut port = Port::new(0x60);

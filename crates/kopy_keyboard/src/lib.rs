@@ -1,11 +1,8 @@
 #![no_std]
-#![no_main]
 
-use core::fmt::Write;
-use kopy_core::vga_buffer::{Buffer, BUFFER_HEIGHT};
-use kopy_core::{print, serial_print, vga_buffer::WRITER};
+use kopy_core::{print, vga_buffer::WRITER};
 use lazy_static::lazy_static;
-use pc_keyboard::{layouts, DecodedKey, HandleControl, KeyCode, Keyboard, ScancodeSet1};
+use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
 use spin::Mutex;
 use x86_64::instructions::interrupts;
 use x86_64::instructions::port::Port;

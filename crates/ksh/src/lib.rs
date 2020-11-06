@@ -1,7 +1,6 @@
 #![no_std]
-#![no_main]
 
-use kopy_core::vga_buffer::{Buffer, Writer, BUFFER_HEIGHT, BUFFER_WIDTH, WRITER};
+use kopy_core::vga_buffer::{Buffer, BUFFER_HEIGHT, WRITER};
 use kopy_core::{print, println};
 
 pub fn init() {
@@ -27,7 +26,7 @@ pub fn new_line() {
     print!("\n$ ");
 }
 
-pub fn handle_line(buffer: &Buffer) {
+pub fn handle_line(_buffer: &Buffer) {
     // let mut line: String = " ".to_string();
     // for char in 0..BUFFER_WIDTH {
     //     let screen_char = buffer.chars[BUFFER_HEIGHT - 1][char].read();

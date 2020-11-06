@@ -1,6 +1,5 @@
+use kopy_asm::{_x86_asm_ltr, _x86_asm_set_cs};
 use lazy_static::lazy_static;
-use x86_64::instructions::segmentation::set_cs;
-use x86_64::instructions::tables::load_tss;
 use x86_64::structures::gdt::{Descriptor, GlobalDescriptorTable, SegmentSelector};
 use x86_64::structures::tss::TaskStateSegment;
 use x86_64::VirtAddr;
@@ -45,7 +44,7 @@ struct Selectors {
 pub fn init() {
     GDT.0.load();
     unsafe {
-        set_cs(GDT.1.code_selector);
-        load_tss(GDT.1.tss_selector);
+        _x86_asm_set_cs(u64::from(GDT.1.code_selector.0));
+        _x86_asm_ltr(GDT.1.tss_selector.0);
     }
 }

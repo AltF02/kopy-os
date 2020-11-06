@@ -125,7 +125,7 @@ impl Writer {
         };
 
         if self.column_position > 2 {
-            let mut row = BUFFER_HEIGHT - 1;
+            let row = BUFFER_HEIGHT - 1;
             let col = self.column_position - 1;
             self.column_position = col;
             self.buffer.chars[row][col].write(blank);
