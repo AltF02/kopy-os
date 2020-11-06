@@ -11,6 +11,7 @@ pub fn init() {
     print!("\n");
     println!("For more info on how to run ksh enter help");
     print!("\n");
+    println!("ASM Debug: {}", kopy_asm::add());
 
     new_line();
 }

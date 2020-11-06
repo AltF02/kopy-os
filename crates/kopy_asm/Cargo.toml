@@ -1,5 +1,5 @@
 [package]
-name = "ksh"
+name = "kopy_asm"
 version = "0.1.0"
 authors = ["Matthew <staalkoper@gmail.com>"]
 edition = "2018"
@@ -7,5 +7,6 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-kopy_core = { path = "./../kopy_core" }
-kopy_asm = { path = "./../kopy_asm" }
+
+[build-dependencies]
+cc = "1.0.61"

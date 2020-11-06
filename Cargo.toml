@@ -17,6 +17,7 @@ uart_16550 = "0.2.10"
 ksh = { path = "./crates/ksh"}
 kopy_keyboard = { path = "./crates/kopy_keyboard"}
 kopy_core = { path = "./crates/kopy_core" }
+kopy_asm = { path = "./crates/kopy_asm" }
 
 [dependencies.lazy_static]
 version = "1.0"

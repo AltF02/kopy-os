@@ -19,10 +19,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "83732ad599045a978528e4311539fdcb20c30e406b66d1d08cd4089d4fc8d90f"
 
 [[package]]
+name = "cc"
+version = "1.0.61"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ed67cbde08356238e75fc4656be4749481eeffb09e19f320a25237d5221c985d"
+
+[[package]]
 name = "cpuio"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d531514efb06912141fa65967447de805691b685a7565c87d1765afe34a98aa7"
+
+[[package]]
+name = "kopy_asm"
+version = "0.1.0"
+dependencies = [
+ "cc",
+]
 
 [[package]]
 name = "kopy_core"
@@ -52,6 +65,7 @@ name = "kopy_os"
 version = "0.1.0"
 dependencies = [
  "bootloader",
+ "kopy_asm",
  "kopy_core",
  "kopy_keyboard",
  "ksh",
@@ -68,6 +82,7 @@ dependencies = [
 name = "ksh"
 version = "0.1.0"
 dependencies = [
+ "kopy_asm",
  "kopy_core",
 ]
 
