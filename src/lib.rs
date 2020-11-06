@@ -10,8 +10,8 @@ use core::panic::PanicInfo;
 
 pub mod gdt;
 pub mod interrupts;
-pub mod serial;
-pub use kopy_core::vga_buffer;
+
+use kopy_core::{serial_print, serial_println};
 
 pub fn init() {
     gdt::init();

@@ -5,7 +5,8 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
-use kopy_os::{exit_qemu, serial_print, serial_println, QemuExitCode};
+use kopy_core::{serial_print, serial_println};
+use kopy_os::{exit_qemu, QemuExitCode};
 use kopy_os::{Green, Red};
 
 #[no_mangle]

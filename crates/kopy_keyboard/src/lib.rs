@@ -28,6 +28,7 @@ pub fn handle_key_event(mut port: Port<u8>) {
                         WRITER.lock().delete_last_character();
                     }),
                     '\n' => interrupts::without_interrupts(|| {
+                        ksh::handle_line(WRITER.lock().buffer);
                         ksh::new_line();
                     }),
                     _ => print!("{}", character),

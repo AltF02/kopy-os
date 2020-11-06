@@ -26,11 +26,10 @@ pub fn new_line() {
     print!("\n$ ");
 }
 
-pub fn handle_line(line: Buffer) {}
-
-pub fn output<T>(text: T)
-where
-    T: core::fmt::Display,
-{
-    print!("{}", text);
+pub fn handle_line(buffer: &Buffer) {
+    // let mut line: String = " ".to_string();
+    // for char in 0..BUFFER_WIDTH {
+    //     let screen_char = buffer.chars[BUFFER_HEIGHT - 1][char].read();
+    //     line.push(char::from(screen_char.ascii_character));
+    // }
 }
