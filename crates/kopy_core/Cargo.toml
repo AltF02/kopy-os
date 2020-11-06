@@ -1,0 +1,15 @@
+[package]
+name = "kopy_core"
+version = "0.1.0"
+authors = ["Matthew <staalkoper@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+spin = "0.7.0"
+volatile = "0.2.6"
+
+[dependencies.lazy_static]
+version = "1.0"
+features = ["spin_no_std"]

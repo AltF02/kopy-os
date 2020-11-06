@@ -1,0 +1,10 @@
+[package]
+name = "ksh"
+version = "0.1.0"
+authors = ["Matthew <staalkoper@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+kopy_core = { path = "./../kopy_core" }
