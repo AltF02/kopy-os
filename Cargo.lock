@@ -19,15 +19,32 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "83732ad599045a978528e4311539fdcb20c30e406b66d1d08cd4089d4fc8d90f"
 
 [[package]]
+name = "kopy_core"
+version = "0.1.0"
+dependencies = [
+ "lazy_static",
+ "spin 0.7.0",
+ "volatile",
+]
+
+[[package]]
 name = "kopy_os"
 version = "0.1.0"
 dependencies = [
  "bootloader",
+ "ksh",
  "lazy_static",
  "spin 0.7.0",
  "uart_16550",
  "volatile",
  "x86_64",
+]
+
+[[package]]
+name = "ksh"
+version = "0.1.0"
+dependencies = [
+ "kopy_core",
 ]
 
 [[package]]

@@ -13,13 +13,12 @@ pub extern "C" fn _start() -> ! {
 
     kopy_os::init();
 
-    // Raise an error
-    x86_64::instructions::interrupts::int3();
-
     #[cfg(test)]
     test_main();
 
     println!("It did not crash!");
+
+    ksh::init();
     loop {}
 }
 
