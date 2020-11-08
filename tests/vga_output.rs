@@ -5,8 +5,8 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
-use kopy_core::println;
-use kopy_core::vga_buffer::{BUFFER_HEIGHT, BUFFER_WIDTH, WRITER};
+use kopy_os::kopy_core::println;
+use kopy_os::kopy_core::vga_buffer::{BUFFER_HEIGHT, BUFFER_WIDTH, WRITER};
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
