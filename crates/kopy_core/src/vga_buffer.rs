@@ -168,7 +168,7 @@ macro_rules! println {
 #[macro_export]
 macro_rules! eprintln {
     () => ($crate::print!("ERROR: \n"));
-    ($($arg:tt)*) => ($crate::print!("ERROR: {}\n", format_args!($($arg)*)));
+    ($($arg:tt)*) => ($crate::print!("ERROR {}\n", format_args!($($arg)*)));
 }
 
 #[doc(hidden)]

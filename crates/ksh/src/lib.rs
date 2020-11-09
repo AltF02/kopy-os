@@ -9,6 +9,7 @@ pub mod shell;
 use crate::builtin::{builtin_echo, builtin_eval, KshBuiltin};
 use crate::repl::Repl;
 use crate::shell::{KshCommand, KshOutput};
+use alloc::format;
 use alloc::string::{String, ToString};
 use alloc::vec::Vec;
 use core::str::FromStr;
@@ -41,7 +42,7 @@ fn clear_screen() {
 }
 
 fn new_line() {
-    print!("\n$ ");
+    print!("$ ");
 }
 
 fn read_line() -> String {
@@ -93,7 +94,7 @@ pub fn process_command(c: &KshCommand) -> Result<KshOutput, KshOutput> {
         _ => Err(KshOutput {
             code: Some(1),
             stdout: String::from("").into_bytes(),
-            stderr: String::from("").into_bytes(),
+            stderr: String::from(format!("{}: Command not found", &c.keyword)).into_bytes(),
         }),
     }
 }
