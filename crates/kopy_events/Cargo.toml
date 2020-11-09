@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 spin = "0.7.0"
 lazy_static = "1.4.0"
+kopy_core = { path = "./../kopy_core" }

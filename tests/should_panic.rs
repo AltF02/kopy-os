@@ -6,8 +6,8 @@
 
 use core::panic::PanicInfo;
 use kopy_core::{serial_print, serial_println};
+use kopy_os::colors::{Green, Red};
 use kopy_os::{exit_qemu, QemuExitCode};
-use kopy_os::{Green, Red};
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {

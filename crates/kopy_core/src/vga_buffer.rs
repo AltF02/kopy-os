@@ -1,5 +1,9 @@
+extern crate alloc;
+
+use alloc::string::{String, ToString};
 use core::fmt;
 use core::fmt::Write;
+use core::ops::Add;
 use lazy_static::lazy_static;
 use spin::Mutex;
 use volatile::Volatile;
@@ -118,6 +122,15 @@ impl Writer {
         }
     }
 
+    pub fn read_line(&mut self) -> String {
+        let mut line: String = " ".to_string();
+        for char in 0..BUFFER_WIDTH {
+            let screen_char = self.buffer.chars[BUFFER_HEIGHT - 1][char].read();
+            line.push(char::from(screen_char.ascii_character));
+        }
+        line.trim().to_string()
+    }
+
     pub fn delete_last_character(&mut self) {
         let blank = ScreenChar {
             ascii_character: b' ',
@@ -150,6 +163,12 @@ macro_rules! print {
 macro_rules! println {
     () => ($crate::print!("\n"));
     ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
+}
+
+#[macro_export]
+macro_rules! eprintln {
+    () => ($crate::print!("ERROR: \n"));
+    ($($arg:tt)*) => ($crate::print!("ERROR: {}\n", format_args!($($arg)*)));
 }
 
 #[doc(hidden)]

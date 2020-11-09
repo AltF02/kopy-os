@@ -2,9 +2,13 @@
 #![feature(abi_x86_interrupt)]
 #![cfg_attr(test, no_main)]
 #![feature(custom_test_frameworks)]
+#![feature(alloc_error_handler)]
 #![test_runner(crate::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
+extern crate alloc;
+
+use crate::colors::*;
 use core::fmt;
 use core::panic::PanicInfo;
 
@@ -14,6 +18,8 @@ use bootloader::{entry_point, BootInfo};
 #[cfg(test)]
 entry_point!(test_kernel_main);
 
+pub mod allocator;
+pub mod colors;
 pub mod gdt;
 pub mod interrupts;
 pub mod memory;
@@ -93,26 +99,7 @@ pub fn hlt_loop() -> ! {
     }
 }
 
-pub struct Green(pub &'static str);
-
-#[allow(unused_must_use)]
-impl fmt::Display for Green {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "\x1B[32m");
-        write!(f, "{}", self.0)?;
-        write!(f, "\x1B[0m")?;
-        Ok(())
-    }
-}
-
-pub struct Red(pub &'static str);
-
-#[allow(unused_must_use)]
-impl fmt::Display for Red {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "\x1b[31m");
-        write!(f, "{}", self.0)?;
-        write!(f, "\x1B[0m")?;
-        Ok(())
-    }
+#[alloc_error_handler]
+fn alloc_error_handler(layout: alloc::alloc::Layout) -> ! {
+    panic!("allocation error: {:?}", layout)
 }

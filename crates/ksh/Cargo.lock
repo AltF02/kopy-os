@@ -37,11 +37,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "kopy_events"
+version = "0.1.0"
+dependencies = [
+ "kopy_core",
+ "lazy_static",
+ "spin 0.7.0",
+]
+
+[[package]]
 name = "ksh"
 version = "0.1.0"
 dependencies = [
  "kopy_asm",
  "kopy_core",
+ "kopy_events",
+ "lazy_static",
+ "x86_64",
 ]
 
 [[package]]

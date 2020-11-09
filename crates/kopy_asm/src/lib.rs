@@ -10,6 +10,6 @@ extern "C" {
 }
 
 pub fn add() -> u64 {
-    let sum = unsafe { _my_adder(5, 10) };
+    let sum = unsafe { _my_adder(12, 23) };
     sum
 }

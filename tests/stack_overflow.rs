@@ -4,7 +4,7 @@
 
 use core::panic::PanicInfo;
 use kopy_core::{serial_print, serial_println};
-use kopy_os::Green;
+use kopy_os::colors::Green;
 use kopy_os::{exit_qemu, QemuExitCode};
 use lazy_static::lazy_static;
 use x86_64::structures::idt::{InterruptDescriptorTable, InterruptStackFrame};

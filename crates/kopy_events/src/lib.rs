@@ -3,6 +3,8 @@
 
 pub mod events;
 
+extern crate alloc;
+
 use alloc::boxed::Box;
 use alloc::vec::Vec;
 use lazy_static::lazy_static;
@@ -30,9 +32,5 @@ impl<E> Notifier<E> {
         for callback in &self.subscribers {
             callback(&event);
         }
-    }
-
-    pub fn dispatch(&self, event: E) {
-        self.notify(E)
     }
 }

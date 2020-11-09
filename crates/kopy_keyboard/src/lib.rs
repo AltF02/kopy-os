@@ -1,6 +1,7 @@
 #![no_std]
 
 use kopy_core::{print, vga_buffer::WRITER};
+use kopy_events::events::keyboard::{KeyboardEvent, KEYBOARD_NOTIFIER};
 use lazy_static::lazy_static;
 use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard, ScancodeSet1};
 use spin::Mutex;
@@ -24,11 +25,18 @@ pub fn handle_key_event(mut port: Port<u8>) {
                     '\u{8}' => interrupts::without_interrupts(|| {
                         WRITER.lock().delete_last_character();
                     }),
-                    '\n' => interrupts::without_interrupts(|| {
-                        ksh::handle_line(WRITER.lock().buffer);
-                        ksh::new_line();
-                    }),
-                    _ => print!("{}", character),
+                    // '\n' => interrupts::without_interrupts(|| {
+                    //     KEYBOARD_NOTIFIER.lock().notify(KeyboardEvent {
+                    //         ksh::handle_line(WRITER.lock().buffer);
+                    //         ksh::new_line();})
+                    // }),
+                    _ => {
+                        interrupts::without_interrupts(|| {
+                            KEYBOARD_NOTIFIER
+                                .lock()
+                                .notify(KeyboardEvent { key: character })
+                        });
+                    }
                 },
                 DecodedKey::RawKey(key) => match key {
                     _ => print!("{:?}", key),

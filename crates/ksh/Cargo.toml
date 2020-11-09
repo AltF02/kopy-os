@@ -9,3 +9,6 @@ edition = "2018"
 [dependencies]
 kopy_core = { path = "./../kopy_core" }
 kopy_asm = { path = "./../kopy_asm" }
+kopy_events = { path = "./../kopy_events" }
+x86_64 = "0.12.2"
+lazy_static = "1.4.0"

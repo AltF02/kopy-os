@@ -14,6 +14,7 @@ volatile = "0.2.6"
 spin = "0.7.0"
 x86_64 = "0.12.2"
 uart_16550 = "0.2.10"
+linked_list_allocator = "0.8.6"
 ksh = { path = "./crates/ksh"}
 kopy_keyboard = { path = "./crates/kopy_keyboard"}
 kopy_core = { path = "./crates/kopy_core" }
