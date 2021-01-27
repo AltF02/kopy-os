@@ -7,5 +7,5 @@ Kopy os is a work in progress command line based operating system.
 
 ## Run natively
 Requires an physical USB stick.
-* Run `dd if=target/x86_64-blog_os/debug/bootimage-kopy_os.bin of=/dev/sdX && sync` where `/dev/sdX` is your device.
+* Run `dd if=target/x86_64-kopy_os/debug/bootimage-kopy_os.bin of=/dev/sdX && sync` where `/dev/sdX` is your device.
 * Boot the USB
